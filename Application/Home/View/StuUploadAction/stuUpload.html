@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>提交设计页面</title>
+</head>
+<body>
+<IF condition="$judge eq 1">
+	<div style="position: relative;left:10%;width:80%;top:10%;">
+		<div class="easyui-accordion" style="width:100%;">
+			<div title="开题报告" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+				<div class="easyui-panel" title="<IF condition='$ktbg != 0'>最新提交时间:{$ktbg}<ELSE />未提交</IF>" style="width:100%;padding:30px 70px 50px 70px">
+					<form action="{$uploadFile}" enctype="multipart/form-data" method="post" id="upload1">
+						<div style="margin-bottom:20px">
+							<input class="easyui-filebox" name="file1" id="file1" data-options="prompt:'提交开题报告'" style="width:100%">
+						</div>
+						<div>
+							<button type="submit" class="easyui-linkbutton" style="width:100%">提交开题报告</button>
+						</div>
+						<input type="hidden" name="judgeFile" value="1">
+						<input type="hidden" name="xh" value="{$xh}">
+					</form>
+					<br>
+					<div id="jindu1" class="easyui-progressbar" data-options="value:<IF condition='$ktbg != 0'>100<ELSE />0</IF>" style="width:100%;"></div>
+				</div>
+			</div>
+			<div title="毕业论文" data-options="iconCls:'icon-help'" style="padding:10px;">
+				<div class="easyui-panel" title="<IF condition='$bylw != 0'>最新提交时间:{$bylw}<ELSE />未提交</IF> " style="width:100%;padding:30px 70px 50px 70px">
+					<form action="{$uploadFile}" enctype="multipart/form-data" method="post" id="upload2">
+						<div style="margin-bottom:20px">
+							<input class="easyui-filebox" name="file2" id="file2" data-options="prompt:'提交论文'" style="width:100%">
+						</div>
+						<div>
+							<button type="submit" class="easyui-linkbutton" style="width:100%">提交毕业论文</button>
+						</div>
+						<input type="hidden" name="judgeFile" value="2">
+						<input type="hidden" name="xh" value="{$xh}">
+					</form>
+					<br>
+					<div id="jindu2" class="easyui-progressbar" data-options="value:<IF condition='$bylw != 0'>100<ELSE />0</IF>" style="width:100%;"></div>
+				</div>
+			</div>
+			<div title="程序设计" data-options="iconCls:'icon-search'" style="padding:10px;">
+				<div class="easyui-panel" title="<IF condition='$cx != 0'>最新提交时间:{$cx}<ELSE />未提交</IF> " style="width:100%;padding:30px 70px 50px 70px">
+					<form action="{$uploadFile}" enctype="multipart/form-data" method="post" id="upload3">
+						<div style="margin-bottom:20px">
+							<input class="easyui-filebox" name="file3" id="file3" data-options="prompt:'提交程序'" style="width:100%">
+						</div>
+						<div>
+							<button type="submit" class="easyui-linkbutton" style="width:100%">提交程序设计</button>
+						</div>
+						<input type="hidden" name="judgeFile" value="3">
+						<input type="hidden" name="xh" value="{$xh}">
+					</form>		
+					<br>
+					<div id="jindu3" class="easyui-progressbar" data-options="value:<IF condition='$cx != 0'>100<ELSE />0</IF>" style="width:100%;"></div>		
+				</div>
+			</div>
+		</div>	
+	</div>
+	<ELSE />
+	<div style="width:100%;">
+		<table id="ee" class="easyui-datagrid" style="width:100%;height:auto;" singleSelect="true">
+				<thead>
+					<tr>
+						<th field="name1" width="100%" >必须先选题才能提交毕业设计</th>
+					</tr>                          
+				</thead>
+		</table>
+	</div>
+</IF>
+<script>
+$(function(){
+	
+	
+})
+</script>
+</body>
+</html>

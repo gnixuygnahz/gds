@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>这里是选题结果界面</title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/ui/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/ui/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/ui/easyui/demo//demo.css">	
+	<script type="text/javascript" src="__PUBLIC__/ui/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/ui/easyui/jquery.easyui.min.js"></script>
+<script src="http://wx.ancai4399.com/public/js/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+<div style="width:99%;">
+	<div id="p" class="easyui-panel"
+    style="width:100%;padding:10px;background:#fafafa;"
+    data-options="iconCls:'icon-save',closable:true,
+    collapsible:true,">
+    <div> 
+    	<table id="pg" class="easyui-propertygrid" style="width:100%" data-options="
+				url:'{$XtResult}',
+				method:'post',
+				showGroup:true,
+				scrollbarSize:0
+			">
+		</table>
+	 </div>
+	  <br>
+	  <div> 
+	  	<IF condition="$judge eq 1">
+	  		<table id="" class="easyui-datagrid" style="width:100%;height:auto;" singleSelect="true" 
+	  			data-options="iconCls:'icon-save',resizable:true,modal:true"
+	  		>
+				<thead>
+					<tr>
+						<th field="name1" width="25%" >选题结果</th>
+						<th field="name2" width="25%" ></th>
+						<th field="name3" width="25%" ></th>
+						<th field="name4" width="25%" ></th>
+					</tr>                          
+				</thead>                           
+				<tbody>                            
+					<tr>                           
+						<td>题目名称</td>
+						<td>{$info_tm.tmmc}</td> 
+						<td>开发技术</td>
+						<td>{$info_tm.kfjs}</td>
+						<!--<td>出题教师</td>
+						<td>{$jsxm_tm}</td>    -->         
+					</tr>                          
+					<!--<tr>                           
+						<td>开发技术</td>
+						<td>{$info_tm.kfjs}</td>
+						<td>题目描述</td>
+						<td>{$tmms}</td> 
+					</tr>-->
+				</tbody>                           
+			</table>			
+			<br>
+			<div id="panel" class="easyui-panel" title="题目详细信息"
+			    style="width:100%;padding:10px;background:#fafafa;">
+			    <p>{$info_tm.tmms}</p>
+			</div>
+			
+		<ELSE />
+			<table id="ee" class="easyui-datagrid" style="width:100%;height:auto;" singleSelect="true">
+				<thead>
+					<tr>
+						<th field="name1" width="100%" >必须先选题才能看到题目的基本信息</th>
+					</tr>                          
+				</thead>
+			</table>	
+	  	</IF>
+	  </div>
+</div>
+</div>
+<script>
+var editUrl="{$edit}";
+var qq="";
+var tel="";
+$('#pg').propertygrid({
+	showHeader:false
+});
+
+$('#pg1').propertygrid({
+	showHeader:false
+});
+
+$('#pg').propertygrid({
+	/*onDblClickCell:function(){
+		var selector=$('#pg').propertygrid('getSelected').name;
+		if(selector=="QQ号(双击修改)" || selector=="QQ号"){
+			$.messager.prompt('更改QQ号码', '设置你的QQ号码(不允许为空)', function(r){
+				if (r){
+					$.ajax({
+						url: editUrl,
+						type: "post",
+						data: {content :r, select :"qq"},
+						dataType: "json",
+						success: function(data){
+							if(data.status==1){
+								selectAction('{$StuXtResultAction}','选题结果');
+							}
+							else{
+								alert(data.info);
+							}							
+						},
+						error: function(e){
+							alert("error!");
+						}	
+					})
+				}
+			});
+		}
+		else if(selector=="电话号码(双击修改)" || selector=="电话号码"){
+			$.messager.prompt('更改电话号码', '设置你的电话号码(不允许为空)', function(r){
+				if (r){
+					$.ajax({
+						url: editUrl,
+						type: "post",
+						data: {content :r, select :"tel"},
+						dataType: "json",
+						success: function(data){
+							if(data.status==1){
+								selectAction('{$StuXtResultAction}','选题结果');
+							}
+							else{
+								alert(data.info);
+							}
+						},
+						error: function(e){
+							alert("error!");
+						}	
+					})
+				}
+			});
+		}		
+    },
+	onBeginEdit:function(index,row){
+		var selector=row.name;
+		if(row.name=="QQ号(双击修改)" || row.name=="QQ号"){
+			qq=row.value;
+			console.log(qq);
+		}
+		else if(row.name=="电话号码(双击修改)" || row.name=="电话号码"){
+			tel=row.value;
+			console.log(tel);
+		}
+	},*/
+	onAfterEdit:function(index,row,changes){
+		if(getJsonLength(changes)!=0){
+			if(row.name=="QQ号"){
+						$.ajax({
+							url: editUrl,
+							type: "post",
+							data: {content :changes.value, select :"qq"},
+							dataType: "json"
+						})
+			}
+			else if( row.name=="电话号码"){
+						$.ajax({
+							url: editUrl,
+							type: "post",
+							data: {content :changes.value, select :"tel"},
+							dataType: "json"
+						})
+			}	
+		}
+	}
+
+});
+
+function getJsonLength(jsonData){
+
+	var jsonLength = 0;
+
+	for(var item in jsonData){
+
+	jsonLength++;
+
+	}
+
+	return jsonLength;
+
+}
+</script>
+</body>
+</html>

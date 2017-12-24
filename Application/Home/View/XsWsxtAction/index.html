@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table id="tt"  class="easyui-datagrid" style="width:100%;height:100%;border-width: 0px"
+       url="{$load}" toolbar="#tb"
+       rownumbers="true" fitColumns="true" singleSelect="true" pagination="true">
+</table>
+<div id="tb" style="padding:3px">
+    <span>题目查询:</span>
+    <input id="nr" style="line-height:26px;border:1px solid #ccc">
+    <span>编号查询:</span>
+    <input id="tmbh" style="line-height:26px;border:1px solid #ccc">
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="doSearch()">Search</a>
+</div>
+<script>
+    $('#tt').datagrid({
+        columns:[[
+            {field:'tmbh',title:'编号',width:360},
+            {field:'tmmc',title:'题目名称',width:360},
+            {field:'kfjs',title:'开发技术',width:360},
+            {field:'zy',title:'专业',width:140},
+            {field:'xm',title:'导师',width:140},
+            {field:'ck',title:'选题',width:80,formatter:function(value,row,index){
+                var s = "";
+                if(row.bj) {
+                    s = "<a href='#' onclick=\"selectAction('{$tzview}/id/" + row.id + "','通知')\">选</a>";
+
+                }
+                return s;
+            }},
+
+        ]]
+    });
+    function doSearch(){
+        $('#tt').datagrid('load',{
+            nr: $('#nr').val(),
+            tmbh: $('#tmbh').val()
+        });
+    }
+
+</script>
+</body>
+</html>
