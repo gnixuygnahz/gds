@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zn">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/ui/easyui/themes/bootstrap/easyui.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/ui/easyui/themes/icon.css">
+    <script type="text/javascript" src="__PUBLIC__/ui/easyui/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="__PUBLIC__/ui/easyui/jquery.easyui.min.js">
+    </script>
+</head>
+<body>
+<div style="margin:10px">
+<table id="dg" title="" class="easyui-datagrid" striped="true" 
+       url="{$load}" 
+       toolbar="#toolbar" pageSize="15" pageList="[15,20,30,40,50]"
+       rownumbers="true"  singleSelect="true" pagination="true">
+    <thead>
+    <tr>
+<th field="jsbh" width="70" sortable="true" editor="{type:'validatebox' ,options:{required:true}}">教师编号</th>
+        <th field="xm" width="50" editor="{type:'validatebox',options:{required:true}}">姓名</th>
+        <th field="zc" width="50" editor="{type:'validatebox',options:{validType:'email'}}">职称</th>
+         <th field="zy" width="100" editor="{type:'validatebox',options:{required:true}}">专业</th>
+          <th field="qx" width="60" editor="{type:'validatebox',options:{required:true}}">权限</th>
+		      <th field="tel" width="130" editor="{type:'validatebox',options:{validType:'email'}}">联系电话</th>
+        <th field="qq" width="130" editor="{type:'validatebox',options:{validType:'email'}}">QQ</th>
+    
+    <th field="reset" width="60" editor="{type:'validatebox',options:{validType:'email'}}"></th>
+       
+        
+       
+    </tr>
+    </thead>
+</table>
+</div>
+<div id="toolbar">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newTm()">添加</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editTm()">编辑</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyTm()">删除</a>
+</div>
+
+<div id="dlg222" class="easyui-dialog" style="width:300px;height:330px;padding:10px 20px"
+     closed="true" buttons="#dlg222-buttons">
+    <form id="fm333" method="post">
+        <table>
+        <!--<div style="margin-bottom:20px">-->
+            <tr>
+                <td>教师编号:</td>
+                <td><input name="jsbh" class="easyui-textbox" style="width:150px;height:26px" required="true"></td>
+            </tr>
+        <!--</div>-->
+        <!--<div style="margin-bottom:20px">-->
+<tr>
+    <td>姓名:</td>
+<td><input name="xm" class="easyui-textbox" style="width:150px;height:26px" required="true"></td>
+</tr>
+        <!--</div>-->
+        <!--<div style="margin-bottom:20px">-->
+
+<tr>
+    <td>专业:</td>
+    <td><input name="zy" class="easyui-textbox" style="width:150px;height:26px" required="true"></td>
+</tr>
+        <!--</div>-->
+        <!--<div style="margin-bottom:20px">-->
+<tr>
+    <td>职称:</td>
+        <td><input name="zc" class="easyui-textbox" style="width:150px;height:26px" required="true"></td>
+</tr>
+            <tr>
+                <td>权限:</td>
+                <td><select id="cc" class="easyui-combobox" name="qx" style="width:150px;height:26px" >
+    <option value="0"  selected = "selected">教师</option>
+    <option value="1">管理员</option>
+</select></td>
+            </tr>
+        <!--</div>-->
+        <!--<div style="margin-bottom:20px">-->
+
+        <!--</div>-->
+        <!--<div style="margin-bottom:20px">-->
+<tr>
+    <td>联系电话:</td>
+        <td><input name="tel" class="easyui-textbox" style="width:150px;height:26px" ></td>
+</tr>
+<tr>
+    <td>QQ:</td>
+        <td><input name="qq" class="easyui-textbox" style="width:150px;height:26px" ></td>
+</tr>
+        <!--</div>-->
+        </table>
+    </form>
+</div>
+<div id="dlg222-buttons">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveTm()">保存</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg222').dialog('close')">取消</a>
+</div>
+<script>
+
+$('#dg').datagrid({
+	loadFilter: function(data){
+        for(var i=0;i<data.rows.length;i++){
+       
+        data.rows[i].reset='<a href="#" onclick="javascript:resetMm(\''+data.rows[i].jsbh+'\')" >重置密码</a>';
+        }
+        return data;
+	},
+	   columns:[[
+        {field:'jsbh',title:'教师编号',width:70,sortable:true},
+        {field:'xm',title:'姓名',width:50},
+		{field:'zc',title:'职称',width:50},
+		{field:'zy',title:'专业',width:100},
+		{field:'qx',title:'权限',width:60,formatter:function(value,row,index){if(row.qx==0)return '教师';return '管理员'}},
+		{field:'tel',title:'联系电话',width:130},
+        {field:'qq',title:'QQ',width:130},
+		{field:'reset',title:'重置密码',width:60}
+		
+    ]]
+});
+
+    function newTm(){
+        $('#dlg222').dialog('open').dialog('setTitle','新增教师');
+        $('#fm333').form('clear');
+	$('#fm333').form('load',{qx:0});
+        url = '{$saveJs}';
+    }
+
+    function editTm(){
+        var row = $('#dg').datagrid('getSelected');
+        if (row){
+            $('#dlg222').dialog('open').dialog('setTitle','编辑教师');
+            $('#fm333').form('load',row);
+            url = '{$updataJs}/jsbh/'+row.jsbh;
+        }
+    }
+
+    function saveTm(){
+        $('#fm333').form('submit',{
+            url: url,
+            onSubmit: function(){
+				
+                return $(this).form('validate');
+            },
+            success: function(result){
+                var result = eval('('+result+')');
+                if (result.err!=0){
+                    $.messager.alert({
+                        title: 'Error',
+                        msg: result.err
+                    });
+                } else {
+                    $('#dlg222').dialog('close');		// close the dialog
+                    $('#dg').datagrid('reload');	// reload the user data
+                }
+            }
+        });
+    }
+    function destroyTm(){
+        var row = $('#dg').datagrid('getSelected');
+        if (row){
+            $.messager.confirm('确认','你确定要删除该教师吗?',function(r){
+                if (r){
+                    $.post('{$destroyJs}',{jsbh:row.jsbh},function(result){
+                        if (result.err==0){
+                            $('#dg').datagrid('reload');	// reload the user data
+                        } else {
+                            $.messager.show({	// show error message
+                                title: 'Error',
+                                msg: result.err
+                            });
+                        }
+                    },'json');
+                }
+            });
+        }
+    }
+
+
+    function resetMm(jsbh){
+        var row = $('#dg').datagrid('getSelected');
+        if (row){
+            $.messager.confirm('确认','你确定要重置密吗?',function(r){
+                if (r){
+                    $.post('{$resetMm}',{jsbh:jsbh},function(result){
+                        if (result.err==0){
+                            $('#dg').datagrid('reload');	// reload the user data
+                        } else {
+                            $.messager.show({	// show error message
+                                title: 'Error',
+                                msg: result.err
+                            });
+                        }
+                    },'json');
+                }
+            });
+        }
+    }
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GDS毕业设计系统-登录</title>
+    <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+    <script type="text/javascript" src="easyui/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="easyui/jquery.easyui.min.js">
+    </script>
+    <style>
+        .my_center{
+            position: absolute;
+            top:50%;
+            left: 50%;
+            margin-left:-270px;margin-top:-190px;
+        }
+        .my_bottom_color{
+            border-bottom: 5px solid #5B86C6;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            $(".layout-split-north").addClass("my_bottom_color");
+        }
+    </script>
+</head>
+<body class="easyui-layout">
+
+<div id="p" class="easyui-layout" title="My Panel"
+     style="width:522px;height:360px;padding:10px;position: absolute;top:50%;left: 50%; margin-left:-270px;margin-top:-190px;"
+     data-options="cls:'my_center'">
+    <div data-options="region:'north',collapsible:false,split:true" style="height:40px;
+background: -ms-linear-gradient(top,#E8E8E8 , #FFFFFF );        /* IE 10 */
+background:-moz-linear-gradient(top,#E8E8E8,#FFFFFF);/*火狐*/
+background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#E8E8E8), to(#FFFFFF));/*谷歌*/
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E8E8E8), to(#FFFFFF));      /* Safari 4-5, Chrome 1-9*/
+background: -webkit-linear-gradient(top, #E8E8E8, #FFFFFF);   /*Safari5.1 Chrome 10+*/
+background: -o-linear-gradient(top, #E8E8E8, #FFFFFF);
+  overflow-y: hidden;
+ /*Opera 11.10+*/">
+        <p style="font-family: verdana,sans-serif;
+color: #2DB2CE;
+font-size: 14px;
+font-weight: bold;
+letter-spacing: 0.6pt;
+padding: 0;
+margin: 0;
+">&nbsp;GDS</p>
+        <span style="font-family: verdana,sans-serif;color: #365C9E;font-size: 14px;font-weight: bold;font-style: italic;letter-spacing: 0.6pt;">毕业设计系统</span>&nbsp;提供全新毕业设计管理方案</div>
+    <div data-options="region:'south',collapsible:false" style="height:24px;
+    background-image: url(bg-bottom.jpg)">
+
+<p style="color: #FFF;margin: 0px;padding: 0px;text-align: center;margin-top: 5px;font-family:Arial">版权所有 &copy;2016-2020 安徽财经大学 保留所有权利。</p>
+    </div>
+
+    <div data-options="region:'center',collapsible:false" style="padding:5px;background-color: #E6EFFB">
+        <p style="margin-top: 68px;margin-left: 52px;color: #003366;margin-bottom: 0px">欢迎来到GDS毕业设计系统，请输入您的帐号和密码</p>
+        <span style="margin-left: 80px;font-weight: bold;">帐号:</span><input type="text" style="width:218px;margin-top: 28px;margin-bottom: 6px;border-color: #666666;border-width: 1px;height: 20px"><br />
+        <span style="margin-left: 80px;font-weight: bold;">密码:</span><input type="text" style="width:218px;border-color: #666666;margin-bottom: 6px;border-width: 1px;height: 20px"><br />
+        <span style="margin-left: 68px;font-weight: bold;">请选择:</span><select style="width:52px;border-color: #666666;border-width: 1px;height: 20px;margin-bottom: 14px">
+        <option value="stu" selected="selected">学生</option>
+        <option value="tch">教师</option>
+    </select><br />
+        <input style=" margin-left: 100px;" type="image" name="" src="login.gif" border="0" onclick="login(); return false;" class="buttonImg" title="登录"/>
+        <input style=" margin-left:14px" type="image" name="" src="reset.gif" border="0" onclick="login(); return false;"  class="buttonImg" title="登录"/>
+        <input style=" margin-left:14px" type="image" name="" src="fpassword.gif" border="0" onclick="login(); return false;"  class="buttonImg" title="登录"/>
+        <span style="color: #555555;right: 0px;bottom: 0px;position: absolute">版本号：1.0_0</span>
+    </div>
+</div>
+</body>
+</html>

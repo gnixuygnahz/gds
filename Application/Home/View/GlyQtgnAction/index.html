@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div style="padding: 10px">
+    <div class="page-header">
+        <h4>导入</h4>
+    </div>
+
+
+
+    <div style="margin-bottom:20px">
+        <div style="margin-bottom: 5px">学生数据表导入: <a href="{$xsmb}" class="easyui-linkbutton" style="margin-left: 50px">数据表模板</a></div>
+
+        <form id="xs" method="post" enctype="multipart/form-data">
+        <input class="easyui-filebox" name="file1" data-options="prompt:'选择文件...'" style="width:50%">
+        </form>
+    </div>
+    <div style="margin-bottom:20px">
+    <a href="#" class="easyui-linkbutton" style="width:50%" onclick="xssc()">上传excel</a>
+        <script>
+            function xssc(){
+                $('#xs').form({
+                    url:"{$xssc}",
+                onSubmit: function(){
+                    // do some check
+                    // return false to prevent submit;
+                },
+                success:function(data){
+                    alert(data)
+                }
+            });
+
+                $('#xs').submit();
+            }
+
+
+
+        </script>
+</div>
+
+    <div style="margin-bottom:20px">
+        <div style="margin-bottom: 5px">教师数据表导入:<a href="{$jsmb}" class="easyui-linkbutton" style="margin-left: 50px">数据表模板</a></div>
+
+        <form id="js" method="post" enctype="multipart/form-data">
+        <input class="easyui-filebox" name="file1" data-options="prompt:'选择文件...'" style="width:50%">
+            </form>
+    </div>
+    <a href="#" class="easyui-linkbutton" style="width:50%" onclick="jssc()">上传excel</a>
+
+    <script>
+        function jssc(){
+            $('#js').form({
+                url:"{$jssc}",
+                onSubmit: function(){
+                    // do some check
+                    // return false to prevent submit;
+                },
+                success:function(data){
+                    alert(data)
+                }
+            });
+
+            $('#js').submit();
+        }
+
+
+
+    </script>
+
+
+    <div class="page-header">
+        <h4>导出</h4>
+    </div>
+
+
+    <div style="margin-bottom:20px">
+        <div style="margin-bottom: 5px">学生数据表导出:</div>
+        <a href="{$xsdc}" class="easyui-linkbutton" style="width:50%">导出excel</a>
+    </div>
+    <div style="margin-bottom:20px">
+        <div style="margin-bottom: 5px">教师数据表导出:</div>
+        <a href="{$jsdc}" target="_blank" class="easyui-linkbutton" style="width:50%">导出excel</a>
+    </div>
+    <div style="margin-bottom:20px">
+        <div style="margin-bottom: 5px">题目数据表导出:</div>
+        <a href="{$tmdc}" class="easyui-linkbutton" style="width:50%">导出excel</a>
+    </div>
+    <div style="margin-bottom:20px">
+        <div style="margin-bottom: 5px">历届数据库导出:</div>
+        <a href="#" class="easyui-linkbutton" style="width:50%">导出zip</a>
+    </div>
+    <div style="margin-bottom:20px">
+        <div style="margin-bottom: 5px">本届数据库备份（以时间保存）:</div>
+        <a href="#" class="easyui-linkbutton" style="width:50%">备份</a>
+    </div>
+    <div class="messager-icon messager-warning"></div><p style="line-height: 34px">注意：使用模板文件修改才能正常导入，否则会出现乱码。导入后会清空之前的数据，请谨慎操作。</p>
+</div>
+</body>
+</html>

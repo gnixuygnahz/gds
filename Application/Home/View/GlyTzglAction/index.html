@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/ui/easyui/themes/bootstrap/easyui.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/ui/easyui/themes/icon.css">
+    <script type="text/javascript" src="__PUBLIC__/ui/easyui/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="__PUBLIC__/ui/easyui/jquery.easyui.min.js">
+    </script>
+
+</head>
+<body>
+    <div style="margin:10px">
+<table id="dg1234" title="" class="easyui-datagrid" 
+       url="{$load}"  pageSize="15" pageList="[15,20,30,40,50]"
+       toolbar="#toolbar" striped="true" 
+       rownumbers="true" fitColumns="true" singleSelect="true" pagination="true">
+    <thead>
+    <tr>
+        <th field="bt" width="50">标题</th>
+
+
+        <th field="fbrq" width="20">发布日期</th>
+    </tr>
+    </thead>
+</table>
+    </div>
+<div id="toolbar">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyTm()">删除</a>
+</div>
+
+<script>
+
+
+    function destroyTm(){
+        var row = $('#dg1234').datagrid('getSelected');
+        if (row){
+            $.messager.confirm('确认','你确定要删除该通知吗?',function(r){
+                if (r){
+                    $.post('{$destroyTz}',{tzbh:row.id},function(result){
+                        if (result.err==0){
+                            $('#dg1234').datagrid('reload');	// reload the user data
+                        } else {
+                            $.messager.show({	// show error message
+                                title: 'Error',
+                                msg: result.err
+                            });
+                        }
+                    },'json');
+                }
+            });
+        }
+    }
+
+
+</script>
+
+
+
+</body>
+</html>

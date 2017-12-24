@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>毕业设计系统</title>
+    <link rel="stylesheet" type="text/css" href="easyui/themes/bootstrap/easyui.css">
+    <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+    <script type="text/javascript" src="easyui/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="easyui/jquery.easyui.min.js">
+    </script>
+    <style>
+        li{list-style:none;
+        margin: 3px 0 0 0}
+        a{
+            text-decoration:none;color: #000;
+        }
+        ul{
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+<body class="easyui-layout">
+<div data-options="region:'north',split:true" style="height:44px;background-image: url(img/top-bg.jpg);">
+    <div style="margin-top: 9px;margin-left: 9px;width: 170px;padding: 0px;ma">
+    <span style="font-family: verdana,sans-serif;
+color: #265799;
+font-size: 18px;
+font-weight: bold;
+">GDS</span><span style="font-family: verdana,sans-serif;
+color: #242121;
+font-size: 18px;
+font-weight: bold;">毕业设计系统</span>
+</div>
+<div style="position: absolute;top: 4px;right: 4px;width: auto" >
+    <span>当前用户在线:20142944(张雨星)丨</span><a href="#" style="text-decoration:none;color: #000">注销</a>
+</div>
+</div>
+<div data-options="region:'west'" style="width:150px;">
+
+    <div class="easyui-accordion" data-options="multiple:true" style="width:140px;margin-right: 5px;margin-left: 5px">
+        <div title="我需留意" data-options="selected:true" style="overflow:auto;padding:10px;">
+            <ul>
+                <li><a href="#" onclick="selectAction('outlineAction.html','概览')">概览</a></li>
+                <li><a href="#" onclick="selectAction('tzviewlistAction.html','信息列表')">查看通知</a></li>
+                <li><a href="#">常用文件下载</a></li>
+                <li><a href="#" onclick="selectAction('tzviewAction.html','通知')">通知内容</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="easyui-accordion" data-options="multiple:true" style="width:140px;margin-right: 5px;margin-left: 5px;margin-top: 5px">
+        <div title="教师目录" data-options="selected:true" style="overflow:auto;padding:10px;">
+            <ul>
+                <li><a onclick="selectAction('tmglAction.html','题目管理')" href="#">题目管理</a></li>
+                <li><a href="#" onclick="selectAction('xscxAction.html','查看学生')">查看学生</a></li>
+                <li><a href="#">教师信息</a></li>
+                <li><a href="#">导出文件</a></li>
+                <li><a href="#">学生提问</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="easyui-accordion" data-options="multiple:true" style="width:140px;margin-right: 5px;margin-left: 5px;margin-top: 5px">
+        <div title="学生目录" data-options="selected:true" style="overflow:auto;padding:10px;">
+            <ul>
+                <li><a href="#">网上选题</a></li>
+                <li><a href="#">选题结果</a></li>
+                <li><a href="#">提交设计</a></li>
+                <li><a href="#">查看导师</a></li>
+                <li><a href="#">个人信息</a></li>
+                <li><a href="#">学生提问</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="easyui-accordion" data-options="multiple:true" style="width:140px;margin-right: 5px;margin-left: 5px;margin-top: 5px">
+        <div title="管理员目录" data-options="selected:true" style="overflow:auto;padding:10px;">
+            <ul>
+                <li><a href="#">发布通知</a></li>
+                <li><a href="#">导师管理</a></li>
+                <li><a href="#">学生管理</a></li>
+                <li><a href="#">题目管理</a></li>
+                <li><a href="#">其他功能</a></li>
+                <li><a href="#">重要设置</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="easyui-accordion" data-options="multiple:true" style="width:140px;margin-right: 5px;margin-left: 5px;margin-top: 5px">
+        <div title="其他" data-options="selected:true" style="overflow:auto;padding:10px;">
+            <ul>
+                <li><a href="#">修改密码</a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="mainF" data-options="region:'center',title:'概览'" style="">
+
+
+
+</div>
+
+<script>
+
+    function selectAction(inherf,intitle){
+        $('#mainF').panel('refresh',inherf);
+        $('#mainF').panel('setTitle',intitle);
+    }
+
+</script>
+
+</body>
+</html>
